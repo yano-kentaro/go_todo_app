@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/yano-kentaro/go_todo_app/config"
 	"golang.org/x/sync/errgroup"
 )
 
@@ -27,7 +28,9 @@ func main() {
 	}
 }
 
-func run(ctx context.Context, l net.Listener) error {
+func run(ctx context.Context) error {
+	cfg, err := config.New()
+
 	// HTTPサーバーを起動
 	s := &http.Server{
 		Handler: http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
